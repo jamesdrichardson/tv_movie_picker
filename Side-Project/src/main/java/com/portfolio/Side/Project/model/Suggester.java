@@ -20,3 +20,5 @@ public class Suggester {
         return "Suggester Name: " + this.suggesterName;
     }
 }
+
+
