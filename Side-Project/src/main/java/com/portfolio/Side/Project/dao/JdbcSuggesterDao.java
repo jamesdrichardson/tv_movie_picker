@@ -20,7 +20,7 @@ public class JdbcSuggesterDao implements SuggesterDao{
     public Suggester getSuggesterByName(String suggesterName) {
         Suggester suggester = null;
 
-        String sql = "select suggester_name from suggester";
+        String sql = "select suggester_name from suggester where suggester_name = ?";
 
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, suggesterName);
@@ -58,7 +58,12 @@ public class JdbcSuggesterDao implements SuggesterDao{
 
         String sql = "delete from suggester where suggester_name=?;";
 
+        String sqlMov = "delete from movie where suggester_name=?;";
+        String sqlTvs = "delete from tv_show where suggester_name=?;";
+
         try {
+            jdbcTemplate.update(sqlMov, suggesterName);
+            jdbcTemplate.update(sqlTvs, suggesterName);
             count = jdbcTemplate.update(sql, suggesterName);
         } catch (CannotGetJdbcConnectionException e){
             throw new DaoException("Unable to connect to server...", e);
