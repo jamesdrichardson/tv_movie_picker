@@ -3,6 +3,11 @@ package com.portfolio.Side.Project.model;
 public class Suggester {
 
     public String suggesterName;
+
+    public Suggester() {
+
+    }
+
     public Suggester(String suggesterName) {
         this.suggesterName = suggesterName;
     }

@@ -7,7 +7,7 @@ public interface SuggesterDao {
 
     Suggester createSuggester(Suggester suggester);
 
-    Suggester deleteSuggesterByName(String suggesterName);
+    int deleteSuggesterByName(String suggesterName);
 
     Suggester updateSuggesterName (Suggester updatedSuggester);
 }
