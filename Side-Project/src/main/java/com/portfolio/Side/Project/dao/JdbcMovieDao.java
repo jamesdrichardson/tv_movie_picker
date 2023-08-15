@@ -37,7 +37,7 @@ public class JdbcMovieDao implements MovieDao {
     public List<Movie> getMovies() {
         List<Movie> movies = new ArrayList<>();
 
-        String sql = "select * from movie";
+        String sql = "select * from movie order by movie_id";
 
         try{
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
@@ -45,7 +45,7 @@ public class JdbcMovieDao implements MovieDao {
                 Movie movie = mapRowToMovie(results);
                 movies.add(movie);
             }
-        }  catch (CannotGetJdbcConnectionException e){
+        }catch (CannotGetJdbcConnectionException e){
             throw new DaoException("Unable to connect to server...", e);
         }
         return movies;
@@ -63,7 +63,7 @@ public class JdbcMovieDao implements MovieDao {
                 Movie movie = mapRowToMovie(results);
                 movies.add(movie);
             }
-        }  catch (CannotGetJdbcConnectionException e){
+        }catch (CannotGetJdbcConnectionException e){
             throw new DaoException("Unable to connect to server...", e);
         }
         return movies;
@@ -80,7 +80,7 @@ public class JdbcMovieDao implements MovieDao {
                 Movie movie = mapRowToMovie(results);
                 movies.add(movie);
             }
-        } catch (CannotGetJdbcConnectionException e){
+        }catch (CannotGetJdbcConnectionException e){
             throw new DaoException("Unable to connect to server...", e);
         }
         return movies;
@@ -104,7 +104,7 @@ public class JdbcMovieDao implements MovieDao {
             movieToAdd = getMovieById(newMovieId);
         }catch (CannotGetJdbcConnectionException e){
             throw new DaoException("Unable to connect to server...", e);
-        } catch (DataIntegrityViolationException e){
+        }catch (DataIntegrityViolationException e){
             throw new DaoException("Data Integrity Violation", e);
         }
 
@@ -129,9 +129,9 @@ public class JdbcMovieDao implements MovieDao {
                 throw new DaoException("Zero rows affected, expected at least one...");
             }
             movie = getMovieById(movieToUpdate.getId());
-        } catch (CannotGetJdbcConnectionException e){
+        }catch (CannotGetJdbcConnectionException e){
             throw new DaoException("Unable to connect to server...");
-        } catch (DataIntegrityViolationException e){
+        }catch (DataIntegrityViolationException e){
             throw new DaoException("Data Integrity Violation", e);
         }
         return movie;
@@ -145,9 +145,9 @@ public class JdbcMovieDao implements MovieDao {
 
         try{
             count = jdbcTemplate.update(sql, movieId);
-        } catch (CannotGetJdbcConnectionException e){
+        }catch (CannotGetJdbcConnectionException e){
             throw new DaoException("Unable to connect to server...", e);
-        } catch (DataIntegrityViolationException e){
+        }catch (DataIntegrityViolationException e){
             throw new DaoException("Data Integrity Violation", e);
         }
         return count;

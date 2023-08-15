@@ -1,7 +1,6 @@
 package com.portfolio.Side.Project.model;
 
 import java.awt.*;
-import java.math.BigDecimal;
 
 public class TvShow {
 
@@ -20,8 +19,8 @@ public class TvShow {
     Image image;
     boolean completed;
     boolean ongoing;
-    int episode_count;
-    int season_count;
+    int episodeCount;
+    int seasonCount;
     String episodeLength;
     String episodesPerSeason;
     String dayOfRelease;
@@ -29,7 +28,7 @@ public class TvShow {
     //for creating new tvShows without id
 
 
-    public TvShow(String name, String streamingService, String genre1, String genre2, int imbdRating, int rtRating, String description, String keyword1, String keyword2, String keyword3, String suggesterName, Image image, boolean completed, boolean ongoing, int episode_count, int season_count, String episodeLength, String episodesPerSeason, String dayOfRelease) {
+    public TvShow(String name, String streamingService, String genre1, String genre2, int imbdRating, int rtRating, String description, String keyword1, String keyword2, String keyword3, String suggesterName, Image image, boolean completed, boolean ongoing, int episodeCount, int seasonCount, String episodeLength, String episodesPerSeason, String dayOfRelease) {
         this.name = name;
         this.streamingService = streamingService;
         this.genre1 = genre1;
@@ -44,14 +43,14 @@ public class TvShow {
         this.image = image;
         this.completed = completed;
         this.ongoing = ongoing;
-        this.episode_count = episode_count;
-        this.season_count = season_count;
+        this.episodeCount = episodeCount;
+        this.seasonCount = seasonCount;
         this.episodeLength = episodeLength;
         this.episodesPerSeason = episodesPerSeason;
         this.dayOfRelease = dayOfRelease;
     }
 
-    public TvShow(int id, String name, String streamingService, String genre1, String genre2, int imbdRating, int rtRating, String description, String keyword1, String keyword2, String keyword3, String suggesterName, Image image, boolean completed, boolean ongoing, int episode_count, int season_count, String episodeLength, String episodesPerSeason, String dayOfRelease) {
+    public TvShow(int id, String name, String streamingService, String genre1, String genre2, int imbdRating, int rtRating, String description, String keyword1, String keyword2, String keyword3, String suggesterName, Image image, boolean completed, boolean ongoing, int episodeCount, int seasonCount, String episodeLength, String episodesPerSeason, String dayOfRelease) {
         this.id = id;
         this.name = name;
         this.streamingService = streamingService;
@@ -67,11 +66,16 @@ public class TvShow {
         this.image = image;
         this.completed = completed;
         this.ongoing = ongoing;
-        this.episode_count = episode_count;
-        this.season_count = season_count;
+        this.episodeCount = episodeCount;
+        this.seasonCount = seasonCount;
         this.episodeLength = episodeLength;
         this.episodesPerSeason = episodesPerSeason;
         this.dayOfRelease = dayOfRelease;
+    }
+
+    //for use with mapping functions
+    public TvShow() {
+
     }
 
     public int getId() {
@@ -194,20 +198,20 @@ public class TvShow {
         this.ongoing = ongoing;
     }
 
-    public int getEpisode_count() {
-        return episode_count;
+    public int getEpisodeCount() {
+        return episodeCount;
     }
 
-    public void setEpisode_count(int episode_count) {
-        this.episode_count = episode_count;
+    public void setEpisodeCount(int episodeCount) {
+        this.episodeCount = episodeCount;
     }
 
-    public int getSeason_count() {
-        return season_count;
+    public int getSeasonCount() {
+        return seasonCount;
     }
 
-    public void setSeason_count(int season_count) {
-        this.season_count = season_count;
+    public void setSeasonCount(int seasonCount) {
+        this.seasonCount = seasonCount;
     }
 
     public String getEpisodeLength() {

@@ -66,7 +66,7 @@ public class Movie {
         this.director = director;
     }
 
-
+    //for use with mapping functions
     public Movie() {
 
     }
