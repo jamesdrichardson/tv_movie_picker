@@ -1,6 +1,7 @@
 package com.portfolio.TvMoviePicker.model;
 
 import java.awt.*;
+import java.math.BigDecimal;
 
 public class TvShow {
 
@@ -9,7 +10,7 @@ public class TvShow {
     String streamingService;
     String genre1;
     String genre2;
-    int imbdRating;
+    BigDecimal imdbRating;
     int rtRating;
     String description;
     String keyword1;
@@ -28,12 +29,12 @@ public class TvShow {
     //for creating new tvShows without id
 
 
-    public TvShow(String name, String streamingService, String genre1, String genre2, int imbdRating, int rtRating, String description, String keyword1, String keyword2, String keyword3, String suggesterName, Image image, boolean completed, boolean ongoing, int episodeCount, int seasonCount, String episodeLength, String episodesPerSeason, String dayOfRelease) {
+    public TvShow(String name, String streamingService, String genre1, String genre2, BigDecimal imdbRating, int rtRating, String description, String keyword1, String keyword2, String keyword3, String suggesterName, Image image, boolean completed, boolean ongoing, int episodeCount, int seasonCount, String episodeLength, String episodesPerSeason, String dayOfRelease) {
         this.name = name;
         this.streamingService = streamingService;
         this.genre1 = genre1;
         this.genre2 = genre2;
-        this.imbdRating = imbdRating;
+        this.imdbRating = imdbRating;
         this.rtRating = rtRating;
         this.description = description;
         this.keyword1 = keyword1;
@@ -50,13 +51,13 @@ public class TvShow {
         this.dayOfRelease = dayOfRelease;
     }
 
-    public TvShow(int id, String name, String streamingService, String genre1, String genre2, int imbdRating, int rtRating, String description, String keyword1, String keyword2, String keyword3, String suggesterName, Image image, boolean completed, boolean ongoing, int episodeCount, int seasonCount, String episodeLength, String episodesPerSeason, String dayOfRelease) {
+    public TvShow(int id, String name, String streamingService, String genre1, String genre2, BigDecimal imdbRating, int rtRating, String description, String keyword1, String keyword2, String keyword3, String suggesterName, Image image, boolean completed, boolean ongoing, int episodeCount, int seasonCount, String episodeLength, String episodesPerSeason, String dayOfRelease) {
         this.id = id;
         this.name = name;
         this.streamingService = streamingService;
         this.genre1 = genre1;
         this.genre2 = genre2;
-        this.imbdRating = imbdRating;
+        this.imdbRating = imdbRating;
         this.rtRating = rtRating;
         this.description = description;
         this.keyword1 = keyword1;
@@ -118,12 +119,12 @@ public class TvShow {
         this.genre2 = genre2;
     }
 
-    public int getImbdRating() {
-        return imbdRating;
+    public BigDecimal getImdbRating() {
+        return imdbRating;
     }
 
-    public void setImbdRating(int imbdRating) {
-        this.imbdRating = imbdRating;
+    public void setImdbRating(BigDecimal imdbRating) {
+        this.imdbRating = imdbRating;
     }
 
     public int getRtRating() {

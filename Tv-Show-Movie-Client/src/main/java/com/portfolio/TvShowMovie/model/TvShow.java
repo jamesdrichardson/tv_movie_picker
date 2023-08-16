@@ -1,6 +1,7 @@
 package com.portfolio.TvShowMovie.model;
 
 import java.awt.*;
+import java.math.BigDecimal;
 
 public class TvShow {
 
@@ -9,7 +10,7 @@ public class TvShow {
     String streamingService;
     String genre1;
     String genre2;
-    int imbdRating;
+    BigDecimal imdbRating;
     int rtRating;
     String description;
     String keyword1;
@@ -65,12 +66,12 @@ public class TvShow {
         this.genre2 = genre2;
     }
 
-    public int getImbdRating() {
-        return imbdRating;
+    public BigDecimal getImdbRating() {
+        return imdbRating;
     }
 
-    public void setImbdRating(int imbdRating) {
-        this.imbdRating = imbdRating;
+    public void setImdbRating(BigDecimal imdbRating) {
+        this.imdbRating = imdbRating;
     }
 
     public int getRtRating() {

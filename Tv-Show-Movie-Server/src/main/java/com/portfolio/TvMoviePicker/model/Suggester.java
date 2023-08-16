@@ -8,6 +8,8 @@ public class Suggester {
         this.suggesterName = suggesterName;
     }
 
+    public Suggester(){}
+
     public String getSuggesterName() {
         return suggesterName;
     }

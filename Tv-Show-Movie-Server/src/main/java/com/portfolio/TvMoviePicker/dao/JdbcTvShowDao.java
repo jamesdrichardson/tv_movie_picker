@@ -6,11 +6,13 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class JdbcTvShowDao implements TvShowDao{
     private final JdbcTemplate jdbcTemplate;
     public JdbcTvShowDao(DataSource dataSource){jdbcTemplate = new JdbcTemplate(dataSource);}
@@ -95,7 +97,7 @@ public class JdbcTvShowDao implements TvShowDao{
 
         try {
             int newTvShowId = jdbcTemplate.queryForObject(sql, int.class, newTvShow.getName(), newTvShow.getStreamingService(), newTvShow.getGenre1(),
-                    newTvShow.getGenre2(), newTvShow.getImbdRating(), newTvShow.getRtRating(), newTvShow.getDescription(), newTvShow.getKeyword1(),
+                    newTvShow.getGenre2(), newTvShow.getImdbRating(), newTvShow.getRtRating(), newTvShow.getDescription(), newTvShow.getKeyword1(),
                     newTvShow.getKeyword2(), newTvShow.getKeyword3(), newTvShow.getSuggesterName(), newTvShow.isCompleted(), newTvShow.isOngoing(), newTvShow.getEpisodeCount(),
                     newTvShow.getSeasonCount(), newTvShow.getEpisodeLength(), newTvShow.getEpisodesPerSeason(), newTvShow.getDayOfRelease());
 
@@ -119,7 +121,7 @@ public class JdbcTvShowDao implements TvShowDao{
 
        try {
            int rowsAffected = jdbcTemplate.update(sql, tvShowToUpdate.getName(), tvShowToUpdate.getStreamingService(), tvShowToUpdate.getGenre1(),
-                   tvShowToUpdate.getGenre2(), tvShowToUpdate.getImbdRating(), tvShowToUpdate.getRtRating(), tvShowToUpdate.getDescription(), tvShowToUpdate.getKeyword1(),
+                   tvShowToUpdate.getGenre2(), tvShowToUpdate.getImdbRating(), tvShowToUpdate.getRtRating(), tvShowToUpdate.getDescription(), tvShowToUpdate.getKeyword1(),
                    tvShowToUpdate.getKeyword2(), tvShowToUpdate.getKeyword3(), tvShowToUpdate.getSuggesterName(), tvShowToUpdate.isCompleted(), tvShowToUpdate.isOngoing(), tvShowToUpdate.getEpisodeCount(),
                    tvShowToUpdate.getSeasonCount(), tvShowToUpdate.getEpisodeLength(), tvShowToUpdate.getEpisodesPerSeason(), tvShowToUpdate.getDayOfRelease());
 
@@ -159,7 +161,7 @@ public class JdbcTvShowDao implements TvShowDao{
         tvShow.setStreamingService(rs.getString("tv_show_streaming_service"));
         tvShow.setGenre1(rs.getString("tv_show_genre1"));
         tvShow.setGenre2(rs.getString("tv_show_genre2"));
-        tvShow.setImbdRating(rs.getInt("tv_show_IMBD_rating"));
+        tvShow.setImdbRating(rs.getInt("tv_show_IMBD_rating"));
         tvShow.setRtRating(rs.getInt("tv_show_RT_rating"));
         tvShow.setDescription(rs.getString("tv_show_description"));
         tvShow.setKeyword1(rs.getString("tv_show_keyword1"));

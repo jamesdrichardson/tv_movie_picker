@@ -6,11 +6,13 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class JdbcMovieDao implements MovieDao {
 
     private final JdbcTemplate jdbcTemplate;
@@ -97,7 +99,7 @@ public class JdbcMovieDao implements MovieDao {
 
         try {
             int newMovieId = jdbcTemplate.queryForObject(sql, int.class, newMovie.getName(), newMovie.getStreamingService(), newMovie.getGenre1(),
-                    newMovie.getGenre2(), newMovie.getImbdRating(), newMovie.getRtRating(), newMovie.getDescription(), newMovie.getKeyword1(),
+                    newMovie.getGenre2(), newMovie.getImdbRating(), newMovie.getRtRating(), newMovie.getDescription(), newMovie.getKeyword1(),
                     newMovie.getKeyword2(), newMovie.getKeyword3(), newMovie.getSuggesterName(), newMovie.isCompleted(), newMovie.isFree(), newMovie.getPrice(),
                     newMovie.getRuntimeMinutes(), newMovie.getDirector());
 
@@ -121,7 +123,7 @@ public class JdbcMovieDao implements MovieDao {
 
         try {
             int rowsAffected = jdbcTemplate.update(sql, movieToUpdate.getName(), movieToUpdate.getStreamingService(), movieToUpdate.getGenre1(),
-                    movieToUpdate.getGenre2(), movieToUpdate.getImbdRating(), movieToUpdate.getRtRating(), movieToUpdate.getDescription(), movieToUpdate.getKeyword1(),
+                    movieToUpdate.getGenre2(), movieToUpdate.getImdbRating(), movieToUpdate.getRtRating(), movieToUpdate.getDescription(), movieToUpdate.getKeyword1(),
                     movieToUpdate.getKeyword2(), movieToUpdate.getKeyword3(), movieToUpdate.getSuggesterName(), movieToUpdate.isCompleted(), movieToUpdate.isFree(), movieToUpdate.getPrice(),
                     movieToUpdate.getRuntimeMinutes(), movieToUpdate.getDirector(), movieToUpdate.getId());
 
@@ -161,7 +163,7 @@ public class JdbcMovieDao implements MovieDao {
         movie.setStreamingService(rs.getString("movie_streaming_service"));
         movie.setGenre1(rs.getString("movie_genre1"));
         movie.setGenre2(rs.getString("movie_genre2"));
-        movie.setImbdRating(rs.getInt("movie_IMBD_rating"));
+        movie.setImdbRating(rs.getInt("movie_IMBD_rating"));
         movie.setRtRating(rs.getInt("movie_RT_rating"));
         movie.setDescription(rs.getString("movie_description"));
         movie.setKeyword1(rs.getString("movie_keyword1"));
