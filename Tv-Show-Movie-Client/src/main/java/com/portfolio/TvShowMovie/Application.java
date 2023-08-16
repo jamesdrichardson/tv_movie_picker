@@ -9,6 +9,7 @@ public class Application {
 
         BasicConsole systemInOutConsole = new SystemInOutConsole();
 
-       // TvShowMovieClientController controller = new TvShowMovieClientController(systemInOutConsole, )
+       TvShowMovieClientController controller = new TvShowMovieClientController(systemInOutConsole);
+       controller.run();
     }
 }

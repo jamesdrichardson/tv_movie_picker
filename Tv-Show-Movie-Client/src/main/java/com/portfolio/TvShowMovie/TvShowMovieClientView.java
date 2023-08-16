@@ -60,7 +60,7 @@ public class TvShowMovieClientView {
      * Displays a welcome message with a green banner.
      */
     public void displayWelcomeMessage() {
-        String message = "Welcome to the Bookmark Manager Admin Application.";
+        String message = "Welcome to the TV show and Movie Picker (TVMP) Application.";
         console.printBanner(FOREGROUND_GREEN + message + FOREGROUND_DEFAULT);
         console.printBlankLine();
     }
