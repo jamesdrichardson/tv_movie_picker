@@ -9,6 +9,8 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class JdbcSuggesterDao implements SuggesterDao{
@@ -96,6 +98,22 @@ public class JdbcSuggesterDao implements SuggesterDao{
         }
 
         return suggester;
+    }
+
+    @Override
+    public List<Suggester> getSuggesters() {
+        List<Suggester> suggesters = new ArrayList<>();
+
+        String sql = "select * from suggester";
+
+        try{
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+            Suggester suggester = mapRowToSuggester(results);
+            suggesters.add(suggester);
+        }catch (CannotGetJdbcConnectionException e){
+            throw new DaoException("Unable to connect to server...", e);
+        }
+        return suggesters;
     }
 
     private Suggester mapRowToSuggester(SqlRowSet rs){

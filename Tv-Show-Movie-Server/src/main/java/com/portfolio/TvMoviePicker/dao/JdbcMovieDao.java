@@ -57,7 +57,7 @@ public class JdbcMovieDao implements MovieDao {
     public List<Movie> getMovieBySuggesterName(String suggesterName) {
         List<Movie> movies = new ArrayList<>();
 
-        String sql = "select * from movies where suggester_name = ? order by movie_id";
+        String sql = "select * from movie where suggester_name = ? order by movie_id";
 
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, suggesterName);
@@ -74,7 +74,7 @@ public class JdbcMovieDao implements MovieDao {
     @Override
     public List<Movie> getMovieByGenre(String genre) {
         List<Movie> movies = new ArrayList<>();
-        String sql = "select * from Movie where movie_genre1 = ? or movie_genre2 = ? order by movie_id;";
+        String sql = "select * from movie where movie_genre1 = ? or movie_genre2 = ? order by movie_id;";
 
         try{
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, genre, genre);

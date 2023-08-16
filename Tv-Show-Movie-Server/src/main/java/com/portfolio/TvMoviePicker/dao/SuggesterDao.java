@@ -2,6 +2,8 @@ package com.portfolio.TvMoviePicker.dao;
 
 import com.portfolio.TvMoviePicker.model.Suggester;
 
+import java.util.List;
+
 public interface SuggesterDao {
     Suggester getSuggesterByName(String suggesterName);
 
@@ -10,4 +12,6 @@ public interface SuggesterDao {
     int deleteSuggesterByName(String suggesterName);
 
     Suggester updateSuggesterName (Suggester updatedSuggester);
+
+    List<Suggester> getSuggesters();
 }

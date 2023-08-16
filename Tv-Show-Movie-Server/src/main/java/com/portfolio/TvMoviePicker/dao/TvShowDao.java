@@ -26,7 +26,7 @@ public interface TvShowDao {
     //creates TvShow
     TvShow createTvShow(TvShow newTvShow);
     //updates TvShow
-    TvShow updateMovie(TvShow tvShowToUpdate);
+    TvShow updateTvShow(TvShow tvShowToUpdate);
     //deletes TvShow by id
     int deleteTvShowById(int tvShowId);
     //
