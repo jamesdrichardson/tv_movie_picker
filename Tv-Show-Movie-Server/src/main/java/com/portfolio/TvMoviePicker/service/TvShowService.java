@@ -4,10 +4,12 @@ package com.portfolio.TvMoviePicker.service;
 import com.portfolio.TvMoviePicker.dao.SuggesterDao;
 import com.portfolio.TvMoviePicker.dao.TvShowDao;
 import com.portfolio.TvMoviePicker.model.TvShow;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class TvShowService {
     private TvShowDao tvShowDao;
     private SuggesterDao suggesterDao;

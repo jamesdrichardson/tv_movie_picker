@@ -111,8 +111,9 @@ public class JdbcTvShowDao implements TvShowDao{
         return tvShowToAdd;
     }
 
+
     @Override
-    public TvShow updateMovie(TvShow tvShowToUpdate) {
+    public TvShow updateTvShow(TvShow tvShowToUpdate) {
        TvShow tvShow = null;
 
        String sql = "update tv_show set tv_show_name = ?, tv_show_streaming_service = ?, tv_show_genre1 = ?, tv_show_genre2 = ?, tv_show_IMBD_rating = ?, tv_show_RT_rating = ?, " +

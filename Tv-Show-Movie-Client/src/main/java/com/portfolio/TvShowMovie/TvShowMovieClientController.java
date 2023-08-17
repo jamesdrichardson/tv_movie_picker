@@ -1,19 +1,33 @@
 package com.portfolio.TvShowMovie;
 
 import com.portfolio.TvShowMovie.model.Movie;
+import com.portfolio.TvShowMovie.model.Suggester;
+import com.portfolio.TvShowMovie.model.TvShow;
+import com.portfolio.TvShowMovie.sevices.MovieService;
+import com.portfolio.TvShowMovie.sevices.SuggesterService;
+import com.portfolio.TvShowMovie.sevices.TvShowService;
 import com.portfolio.util.BasicConsole;
 import com.portfolio.util.BasicLogger;
 
 import java.awt.*;
+import java.util.List;
 
 public class TvShowMovieClientController {
 
     private final TvShowMovieClientView view;
     //todo add api service variables
+    private final SuggesterService suggesterService;
+//    private final MovieService movieService;
+   // private final TvShowService tvShowService;
 
-    public TvShowMovieClientController (BasicConsole console){
+
+    public TvShowMovieClientController (BasicConsole console, String apiBaseUrl){
         view = new TvShowMovieClientView(console);
         //todo add api service variables
+        suggesterService = new SuggesterService(apiBaseUrl);
+//        movieService = new MovieService(apiBaseUrl);
+        //tvShowService = new TvShowService(apiBaseUrl);
+
     }
 
     public void run() {
@@ -198,33 +212,42 @@ public class TvShowMovieClientController {
         final String ADD_SUGGESTER = "Add a new Suggester";
         final String UPDATE_SUGGESTER = "Update a previous Suggester";
         final String DELETE_SUGGESTER = "Remove a Suggester from the list (though you really shouldn't do that for history's sake).";
-        final String VIEW_ALL_SUGGESTERS = "View all Suggesters";
         final String BACK = "Back to main menu.";
-        final String[] SUGGESTER_OPTIONS = {ADD_SUGGESTER,UPDATE_SUGGESTER,DELETE_SUGGESTER,VIEW_ALL_SUGGESTERS,BACK};
+        final String[] SUGGESTER_OPTIONS = {ADD_SUGGESTER,UPDATE_SUGGESTER,DELETE_SUGGESTER,BACK};
 
+        List<Suggester> suggesters = suggesterService.getAllSuggesters();
+        if (suggesters == null){
+            view.displayErrorMessage("Failed to get Suggesters...Check log for more information... :( ");
+            return;
+        }
 
+        Suggester selected = view.selectSuggester(suggesters);
 
-        boolean showSubmenu = true;
-        while (showSubmenu){
-            String subMenuSelection = view.selectFromMenu("Suggester Menu", SUGGESTER_OPTIONS);
+        if (selected != null) {
 
-            switch (subMenuSelection) {
-                case ADD_SUGGESTER:
-                    //todo how to add suggesters without api calls
-                    break;
-                case UPDATE_SUGGESTER:
-                    //todo how to update suggesters without api calls
-                    break;
-                case DELETE_SUGGESTER:
-                    //todo how to delete suggesters without api calls
-                    break;
-                case VIEW_ALL_SUGGESTERS:
-                    //todo how to view all suggesters without api calls
-                    break;
-                case BACK:
-                    showSubmenu = false;
-                    break;
+            view.displaySuggesterDetail(selected);
 
+            boolean showSubmenu = true;
+            while (showSubmenu) {
+                String subMenuSelection = view.selectFromMenu("Suggester Menu", SUGGESTER_OPTIONS);
+
+                switch (subMenuSelection) {
+                    case ADD_SUGGESTER:
+                        addSuggester(selected);
+                        break;
+                    case UPDATE_SUGGESTER:
+                        updateSuggester(selected);
+                        //todo how to update suggesters without api calls
+                        break;
+                    case DELETE_SUGGESTER:
+                        deleteSuggester(selected);
+                        //todo how to delete suggesters without api calls
+                        break;
+                    case BACK:
+                        showSubmenu = false;
+                        break;
+
+                }
             }
         }
     }
@@ -233,11 +256,55 @@ public class TvShowMovieClientController {
     public void updateMovie(){}
     public void deleteMovie(){}
     public void addTvShow(){}
-    public void updateTvShow(){}
-    public void deleteTvShow(){}
-    public void addSuggester(){}
-    public void updateSuggester(){}
-    public void deleteSuggester(){}
+    public void updateTvShow(TvShow updated){
+//        TvShow tvShow = view.promptForTvShowUpdate(updated);
+//        updated.setId(updated.getId());
+//        TvShow returned = tvShowService.update(updated);
+//
+//        if(returned == null){
+//            view.displayErrorMessage("try again fix this later");
+//        } else {
+//            view.displaySuccessMessage("Update successful!");
+//            view.displayTvShowDetail(returned);
+//        }
+    }
+    public void deleteTvShow(){
+
+    }
+    public void addSuggester(Suggester created){
+        Suggester suggester = view.promptForNewSuggesterValues();
+        Suggester returned = suggesterService.add(created);
+
+        if (returned == null){
+            view.displayErrorMessage("Add failed...Check log for more information :( ");
+        } else {
+            view.displaySuccessMessage("Suggester created successful!");
+            view.displaySuggesterDetail(returned);
+        }
+
+
+    }
+    public void updateSuggester(Suggester updated){
+        Suggester suggester = view.promptForSuggesterUpdate(updated);
+        updated.setSuggesterName(updated.getSuggesterName());
+        Suggester returned = suggesterService.update(updated);
+
+        if (returned == null){
+            view.displayErrorMessage("Update failed...Check log for more information :( ");
+        } else {
+            view.displaySuccessMessage("Update successful!");
+            view.displaySuggesterDetail(returned);
+        }
+    }
+    public void deleteSuggester(Suggester selected){
+        boolean successful = suggesterService.delete(selected.getSuggesterName());
+
+        if(successful){
+            view.displaySuccessMessage("Suggester deleted successfully");
+        } else {
+            view.displayErrorMessage("Delete failed...Check log for more information :( ");
+        }
+    }
 
     //probably need some helper methods for searching todo ask Jonathan about these
 

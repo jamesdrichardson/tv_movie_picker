@@ -2,6 +2,7 @@
 package com.portfolio.TvShowMovie;
 
 import com.portfolio.TvShowMovie.model.Movie;
+import com.portfolio.TvShowMovie.model.Suggester;
 import com.portfolio.TvShowMovie.model.TvShow;
 import com.portfolio.util.BasicConsole;
 
@@ -168,6 +169,27 @@ public class TvShowMovieClientView {
         }
     }
 
+    public void displaySuggesterDetail(Suggester suggester){
+        displayMessage("Suggester Details:");
+        displayMessage(String.format("\tSuggester Name: %s", suggester.getSuggesterName()));
+        console.printBlankLine();
+    }
+
+    public void displaySuggesterList(List<Suggester> suggesterList){
+        if (suggesterList == null){
+            displayErrorMessage("There are no Suggesters to show.");
+        } else {
+            displayMessage("Suggesters:");
+            String heading1 = " Suggester Name ";
+            String heading2 = "=================";
+            String row1FormatString = "%-40s";
+
+            for (Suggester suggester : suggesterList){
+                displayMessage(String.format(row1FormatString,suggester.getSuggesterName()));
+            }
+        }
+    }
+
     /**
      * Displays a list of menu options, prompting the user to select one
      * @param menuTitle the title of the menu
@@ -241,6 +263,29 @@ public class TvShowMovieClientView {
         return selected;
     }
 
+    public Suggester selectSuggester(List<Suggester> suggesters){
+        Suggester selected = null;
+
+        if (suggesters == null || suggesters.size() == 0){
+            displayErrorMessage("There are no suggesters to show.");
+        } else {
+            while (selected == null){
+                displaySuggesterList(suggesters);
+                String suggesterName = console.promptForString("Enter Suggester Name to select [0 to cancel]: ");
+                if (suggesterName == null || suggesterName.isEmpty()){
+                    break;
+                }
+
+                selected = suggesters.stream().filter(s -> s.getSuggesterName() == suggesterName).findFirst().orElse(null);
+                if (selected == null) {
+                    displayErrorMessage("The name entered is not valid, please try again.");
+                }
+            }
+        }
+        console.printBlankLine();
+        return selected;
+    }
+
     /**
      * Prompts for all Tv Show values that are updatable, showing their current value.
      *   Note: Values update to the entered value using empty/null to clear. They DO NOT default to the current value.
@@ -264,7 +309,7 @@ public class TvShowMovieClientView {
         return updated;
     }
 
-    public Movie promptForMovieShowUpdate(Movie existing) {
+    public Movie promptForMovieUpdate(Movie existing) {
         Movie updated = null;
         if (existing != null) {
             console.printMessage("Enter new Movie values");
@@ -277,6 +322,17 @@ public class TvShowMovieClientView {
             }
             updated.setRuntimeMinutes(promptForIntegerUpdateValue("How long is it?", false, existing.getRuntimeMinutes()));
             updated.setDirector(promptForStringUpdateValue("Who directed the movie?", true, existing.getDirector()));;
+
+        }
+        return updated;
+    }
+
+    public Suggester promptForSuggesterUpdate(Suggester existing) {
+        Suggester updated = null;
+        if (existing != null) {
+            console.printMessage("Enter new Suggester values");
+            updated = new Suggester();
+            updated.setSuggesterName(promptForStringUpdateValue("Name", true, existing.getSuggesterName()));
 
         }
         return updated;
@@ -333,6 +389,12 @@ public class TvShowMovieClientView {
 
 
         return movie;
+    }
+
+    public Suggester promptForNewSuggesterValues(){
+        Suggester suggester = new Suggester();
+        suggester.setSuggesterName(promptForStringUpdateValue("Name" , true, null));
+        return suggester;
     }
 
 
