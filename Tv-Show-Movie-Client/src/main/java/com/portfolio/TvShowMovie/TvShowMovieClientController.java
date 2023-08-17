@@ -14,9 +14,8 @@ import java.util.List;
 
 public class TvShowMovieClientController {
     private final SuggesterService suggesterService;
-    //todo add api service variables
-//    private final MovieService movieService;
-    // private final TvShowService tvShowService;
+    private final MovieService movieService;
+    private final TvShowService tvShowService;
 
     private final TvShowMovieClientView view;
 
@@ -24,10 +23,9 @@ public class TvShowMovieClientController {
 
     public TvShowMovieClientController (BasicConsole console, String apiBaseUrl){
         view = new TvShowMovieClientView(console);
-        //todo add api service variables
         suggesterService = new SuggesterService(apiBaseUrl);
-//        movieService = new MovieService(apiBaseUrl);
-        //tvShowService = new TvShowService(apiBaseUrl);
+        movieService = new MovieService(apiBaseUrl);
+        tvShowService = new TvShowService(apiBaseUrl);
 
     }
 
@@ -75,7 +73,13 @@ public class TvShowMovieClientController {
         final String BACK = "Back to main menu.";
         final String[] MOVIE_OPTIONS = {MOVIE_SEARCH,ADD_MOVIE,UPDATE_MOVIE,DELETE_MOVIE,BACK};
 
+        List<Movie> movies = movieService.getAllMovies();
+        if (movies == null){
+            view.displayErrorMessage("Failed to get Movies...Check log for more information... :( ");
+            return;
+        }
 
+        Movie selected = view.selectMovie(movies);
 
         boolean showSubmenu = true;
         while (showSubmenu){
@@ -86,13 +90,13 @@ public class TvShowMovieClientController {
                     movieSearch();
                     break;
                 case ADD_MOVIE:
-                    //todo how to add movies without api calls
+                    addMovie();
                     break;
                 case UPDATE_MOVIE:
-                    //todo how to update movies without api calls
+                    updateMovie(selected);
                     break;
                 case DELETE_MOVIE:
-                    //todo how to delete movies without api calls
+                    deleteMovie(selected);
                     break;
                 case BACK:
                     showSubmenu = false;
@@ -118,16 +122,16 @@ public class TvShowMovieClientController {
 
             switch (subMenuSelection) {
                 case SEARCH_BY_SUGGESTER:
-                    //todo how to add movies without api calls
+                    //todo how to search movies with api calls
                     break;
                 case SEARCH_BY_GENRE:
-                    //todo how to add movies without api calls
+                    //todo how to search movies with api calls
                     break;
                 case RETURN_ALL_MOVIES:
-                    //todo how to update movies without api calls
+                    //todo how to Search movies with api calls
                     break;
                 case PICK_RANDOM_MOVIE:
-                    //todo how to delete movies without api calls
+                    //todo how to Search movies with api calls
                     break;
                 case BACK:
                     showSubmenu = false;
@@ -146,6 +150,14 @@ public class TvShowMovieClientController {
         final String BACK = "Back to main menu.";
         final String[] TV_SHOW_OPTIONS = {TV_SHOW_SEARCH,ADD_TV_SHOW,UPDATE_TV_SHOW,DELETE_TV_SHOW,BACK};
 
+        List<TvShow> tvShows = tvShowService.getAllTvShows();
+        if (tvShows == null){
+            view.displayErrorMessage("Failed to get TV Shows...Check log for more information... :( ");
+            return;
+        }
+
+        TvShow selected = view.selectTvShow(tvShows);
+
 
 
         boolean showSubmenu = true;
@@ -157,13 +169,13 @@ public class TvShowMovieClientController {
                     tvShowSearch();
                     break;
                 case ADD_TV_SHOW:
-                    //todo how to add movies without api calls
+                    addTvShow();
                     break;
                 case UPDATE_TV_SHOW:
-                    //todo how to update movies without api calls
+                    updateTvShow(selected);
                     break;
                 case DELETE_TV_SHOW:
-                    //todo how to delete movies without api calls
+                    deleteTvShow(selected);
                     break;
                 case BACK:
                     showSubmenu = false;
@@ -177,10 +189,10 @@ public class TvShowMovieClientController {
 
         final String SEARCH_BY_SUGGESTER = "Search by who suggested the show.";
         final String SEARCH_BY_GENRE = "Search by genre.";
-        final String RETURN_ALL_MOVIES = "Show all available TV shows";
-        final String PICK_RANDOM_MOVIE = "Surprise me!";
+        final String RETURN_ALL_TV_SHOWS = "Show all available TV shows";
+        final String PICK_RANDOM_TV_SHOW = "Surprise me!";
         final String BACK = "Return to TV show Menu.";
-        final String[] TV_SHOW_SEARCH_OPTIONS = {SEARCH_BY_SUGGESTER,SEARCH_BY_GENRE,RETURN_ALL_MOVIES,PICK_RANDOM_MOVIE,BACK};
+        final String[] TV_SHOW_SEARCH_OPTIONS = {SEARCH_BY_SUGGESTER,SEARCH_BY_GENRE,RETURN_ALL_TV_SHOWS,PICK_RANDOM_TV_SHOW,BACK};
 
         boolean showSubmenu = true;
 
@@ -189,16 +201,16 @@ public class TvShowMovieClientController {
 
             switch (subMenuSelection) {
                 case SEARCH_BY_SUGGESTER:
-                    //todo how to add movies without api calls
+                    //todo how to Search tv shows with api calls
                     break;
                 case SEARCH_BY_GENRE:
-                    //todo how to add movies without api calls
+                    //todo how to Search tv shows with api calls
                     break;
-                case RETURN_ALL_MOVIES:
-                    //todo how to update movies without api calls
+                case RETURN_ALL_TV_SHOWS:
+                    //todo how to Search tv shows with api calls
                     break;
-                case PICK_RANDOM_MOVIE:
-                    //todo how to delete movies without api calls
+                case PICK_RANDOM_TV_SHOW:
+                    //todo how to Search tv shows with api calls
                     break;
                 case BACK:
                     showSubmenu = false;
@@ -234,7 +246,7 @@ public class TvShowMovieClientController {
 
                 switch (subMenuSelection) {
                     case ADD_SUGGESTER:
-                        addSuggester(selected);
+                        addSuggester();
                         break;
                     case UPDATE_SUGGESTER:
                         updateSuggester(selected);
@@ -250,37 +262,80 @@ public class TvShowMovieClientController {
         }
     }
 
-    public void addMovie(){}
-    public void updateMovie(){}
-    public void deleteMovie(){}
-    public void addTvShow(){}
-    public void updateTvShow(TvShow updated){
-//        TvShow tvShow = view.promptForTvShowUpdate(updated);
-//        updated.setId(updated.getId());
-//        TvShow returned = tvShowService.update(updated);
-//
-//        if(returned == null){
-//            view.displayErrorMessage("try again fix this later");
-//        } else {
-//            view.displaySuccessMessage("Update successful!");
-//            view.displayTvShowDetail(returned);
-//        }
-    }
-    public void deleteTvShow(){
-
-    }
-    public void addSuggester(Suggester created){
-        Suggester suggester = view.promptForNewSuggesterValues();
-        Suggester returned = suggesterService.add(created);
+    public void addMovie(){
+        Movie movie = view.promptForNewMovieValues();
+        Movie returned = movieService.add(movie);
 
         if (returned == null){
             view.displayErrorMessage("Add failed...Check log for more information :( ");
         } else {
-            view.displaySuccessMessage("Suggester created successful!");
+            view.displaySuccessMessage("Movie created successfully!");
+            view.displayMovieDetail(returned);
+        }
+    }
+    public void updateMovie(Movie updated){
+        Movie movie = view.promptForMovieUpdate(updated);
+        updated.setId(updated.getId());
+        Movie returned = movieService.update(updated);
+
+        if(returned == null){
+            view.displayErrorMessage("Update failed...Check log for more information :( ");
+        } else {
+            view.displaySuccessMessage("Update successful!");
+            view.displayMovieDetail(returned);
+        }
+    }
+    public void deleteMovie(Movie selected){
+        boolean successful = movieService.delete(selected.getId());
+
+        if(successful){
+            view.displaySuccessMessage("Movie deleted successfully...");
+        } else {
+            view.displayErrorMessage("Delete failed...Check log for more information :( ");
+        }
+    }
+    public void addTvShow(){
+        TvShow tvShow = view.promptForNewTvShowValues();
+        TvShow returned = tvShowService.add(tvShow);
+
+        if (returned == null){
+            view.displayErrorMessage("Add failed...Check log for more information :( ");
+        } else {
+            view.displaySuccessMessage("TV show created successfully!");
+            view.displayTvShowDetail(returned);
+        }
+    }
+    public void updateTvShow(TvShow updated){
+        TvShow tvShow = view.promptForTvShowUpdate(updated);
+        updated.setId(updated.getId());
+        TvShow returned = tvShowService.update(updated);
+
+        if(returned == null){
+            view.displayErrorMessage("Update failed...Check log for more information :( ");
+        } else {
+            view.displaySuccessMessage("Update successful!");
+            view.displayTvShowDetail(returned);
+        }
+    }
+    public void deleteTvShow(TvShow selected){
+        boolean successful = tvShowService.delete(selected.getId());
+
+        if(successful){
+            view.displaySuccessMessage("TV show deleted successfully...");
+        } else {
+            view.displayErrorMessage("Delete failed...Check log for more information :( ");
+        }
+    }
+    public void addSuggester(){
+        Suggester suggester = view.promptForNewSuggesterValues();
+        Suggester returned = suggesterService.add(suggester);
+
+        if (returned == null){
+            view.displayErrorMessage("Add failed...Check log for more information :( ");
+        } else {
+            view.displaySuccessMessage("Suggester created successfully!");
             view.displaySuggesterDetail(returned);
         }
-
-
     }
     public void updateSuggester(Suggester updated){
         Suggester suggester = view.promptForSuggesterUpdate(updated);
@@ -298,7 +353,7 @@ public class TvShowMovieClientController {
         boolean successful = suggesterService.delete(selected.getSuggesterName());
 
         if(successful){
-            view.displaySuccessMessage("Suggester deleted successfully");
+            view.displaySuccessMessage("Suggester deleted successfully :,( good bye forever...");
         } else {
             view.displayErrorMessage("Delete failed...Check log for more information :( ");
         }

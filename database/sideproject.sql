@@ -1,4 +1,4 @@
-drop table if exists movie, tv_show, suggester cascade;
+drop table if exists movie, tv_show, suggester, app_user cascade;
 
 create table suggester (
 suggester_name varchar(25) not null,
@@ -60,5 +60,17 @@ day_of_release varchar(15),
 constraint PK_tv_show primary key (tv_show_id),
 constraint FK_suggester foreign key (tv_show_suggester_name) references suggester (suggester_name),
 constraint UQ_tv_show_name unique (tv_show_name)
+);
+
+create table app_user (
+user_id serial,
+username varchar(50) NOT NULL,
+password_hash varchar(200) NOT NULL,
+role varchar(50) NOT NULL,
+display_name varchar(50),
+img_url varchar(500),
+short_bio varchar(500),
+CONSTRAINT PK_app_user PRIMARY KEY (user_id),
+CONSTRAINT UQ_username UNIQUE (username)
 );
 
