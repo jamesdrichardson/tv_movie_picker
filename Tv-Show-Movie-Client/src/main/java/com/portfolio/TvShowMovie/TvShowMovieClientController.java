@@ -13,12 +13,13 @@ import java.awt.*;
 import java.util.List;
 
 public class TvShowMovieClientController {
+    private final SuggesterService suggesterService;
+    //todo add api service variables
+//    private final MovieService movieService;
+    // private final TvShowService tvShowService;
 
     private final TvShowMovieClientView view;
-    //todo add api service variables
-    private final SuggesterService suggesterService;
-//    private final MovieService movieService;
-   // private final TvShowService tvShowService;
+
 
 
     public TvShowMovieClientController (BasicConsole console, String apiBaseUrl){
@@ -237,16 +238,13 @@ public class TvShowMovieClientController {
                         break;
                     case UPDATE_SUGGESTER:
                         updateSuggester(selected);
-                        //todo how to update suggesters without api calls
                         break;
                     case DELETE_SUGGESTER:
                         deleteSuggester(selected);
-                        //todo how to delete suggesters without api calls
                         break;
                     case BACK:
                         showSubmenu = false;
                         break;
-
                 }
             }
         }

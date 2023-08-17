@@ -5,7 +5,7 @@ import com.portfolio.util.SystemInOutConsole;
 
 public class Application {
 
-    private static final String API_BASE_URL = "https://localhost:9001";
+    private static final String API_BASE_URL = "http://localhost:9000";
     public static void main(String[] args) {
 
         BasicConsole systemInOutConsole = new SystemInOutConsole();
