@@ -163,13 +163,13 @@ public class JdbcMovieDao implements MovieDao {
         movie.setStreamingService(rs.getString("movie_streaming_service"));
         movie.setGenre1(rs.getString("movie_genre1"));
         movie.setGenre2(rs.getString("movie_genre2"));
-        movie.setImdbRating(rs.getBigDecimal("movie_IMBD_rating"));
+        movie.setImdbRating(rs.getBigDecimal("movie_IMDB_rating"));
         movie.setRtRating(rs.getInt("movie_RT_rating"));
         movie.setDescription(rs.getString("movie_description"));
         movie.setKeyword1(rs.getString("movie_keyword1"));
         movie.setKeyword2(rs.getString("movie_keyword2"));
         movie.setKeyword3(rs.getString("movie_keyword3"));
-        movie.setSuggesterName(rs.getString("suggester_name"));
+        movie.setSuggesterName(rs.getString("movie_suggester_name"));
         //not sure how to implement this todo ask Jonathan
         //movie.setImage(rs.("movie_image"));
         movie.setCompleted(rs.getBoolean("movie_completed"));

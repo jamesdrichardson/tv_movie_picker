@@ -104,12 +104,14 @@ public class JdbcSuggesterDao implements SuggesterDao{
     public List<Suggester> getSuggesters() {
         List<Suggester> suggesters = new ArrayList<>();
 
-        String sql = "select * from suggester";
+        String sql = "select suggester_name from suggester";
 
         try{
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
-            Suggester suggester = mapRowToSuggester(results);
-            suggesters.add(suggester);
+            while (results.next()) {
+                Suggester suggester = mapRowToSuggester(results);
+                suggesters.add(suggester);
+            }
         }catch (CannotGetJdbcConnectionException e){
             throw new DaoException("Unable to connect to server...", e);
         }
@@ -119,7 +121,7 @@ public class JdbcSuggesterDao implements SuggesterDao{
     private Suggester mapRowToSuggester(SqlRowSet rs){
         Suggester suggester = new Suggester();
 
-        suggester.setSuggesterName(rs.getString("suggester"));
+        suggester.setSuggesterName(rs.getString("suggester_name"));
 
         return suggester;
     }

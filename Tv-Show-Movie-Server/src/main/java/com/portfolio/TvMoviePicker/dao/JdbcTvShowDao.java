@@ -162,13 +162,13 @@ public class JdbcTvShowDao implements TvShowDao{
         tvShow.setStreamingService(rs.getString("tv_show_streaming_service"));
         tvShow.setGenre1(rs.getString("tv_show_genre1"));
         tvShow.setGenre2(rs.getString("tv_show_genre2"));
-        tvShow.setImdbRating(rs.getBigDecimal("tv_show_IMBD_rating"));
+        tvShow.setImdbRating(rs.getBigDecimal("tv_show_IMDB_rating"));
         tvShow.setRtRating(rs.getInt("tv_show_RT_rating"));
         tvShow.setDescription(rs.getString("tv_show_description"));
         tvShow.setKeyword1(rs.getString("tv_show_keyword1"));
         tvShow.setKeyword2(rs.getString("tv_show_keyword2"));
         tvShow.setKeyword3(rs.getString("tv_show_keyword3"));
-        tvShow.setSuggesterName(rs.getString("suggester_name"));
+        tvShow.setSuggesterName(rs.getString("tv_show_suggester_name"));
         //not sure how to implement this todo ask Jonathan
         //tvShow.setImage(rs.("movie_image"));
         tvShow.setCompleted(rs.getBoolean("tv_show_completed"));

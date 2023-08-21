@@ -51,7 +51,7 @@ public class TvShowMovieClientController {
                         showTvShowSubmenu();
                         break;
                     case SUGGESTER_CONTROLS:
-                        showSuggesterSubmenu();
+                       // showSuggesterSubmenu();
                         break;
                     case EXIT:
                         finished = true;
