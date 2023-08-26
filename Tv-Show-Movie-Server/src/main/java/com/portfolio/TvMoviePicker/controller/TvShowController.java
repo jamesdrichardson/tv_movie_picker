@@ -29,8 +29,10 @@ public class TvShowController {
         return tvShows;
     }
 
-    @RequestMapping(path = "/{suggesterName}", method = RequestMethod.GET)
-    public List<TvShow> getTvShowsBySuggesterName(String suggesterName){
+
+    //todo FIXED
+    @RequestMapping(path = "/suggesterName/{suggesterName}", method = RequestMethod.GET)
+    public List<TvShow> getTvShowsBySuggesterName(@PathVariable String suggesterName){
         List<TvShow> tvShows = new ArrayList<>();
 
         try{
@@ -40,10 +42,10 @@ public class TvShowController {
         }
         return tvShows;
     }
-
+    //todo FIXED
     //todo how to search both genre fields in this method not sure if hitting both based on path
-    @RequestMapping(path = "/{genre}", method = RequestMethod.GET)
-    public List<TvShow> getTvShowsByGenre(String genre){
+    @RequestMapping(path = "/genre1/{genre}", method = RequestMethod.GET)
+    public List<TvShow> getTvShowsByGenre(@PathVariable String genre){
         List<TvShow> tvShows = new ArrayList<>();
 
         try{
@@ -54,8 +56,10 @@ public class TvShowController {
         return tvShows;
     }
 
+
+    //todo FIXED
     @RequestMapping(path = "/{tvShowId}", method = RequestMethod.GET)
-    public TvShow getTvShowById(int tvShowId){
+    public TvShow getTvShowById(@PathVariable int tvShowId){
         TvShow tvShow = null;
 
         try{

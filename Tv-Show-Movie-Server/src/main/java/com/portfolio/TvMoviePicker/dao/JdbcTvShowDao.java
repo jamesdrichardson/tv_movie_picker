@@ -17,6 +17,8 @@ public class JdbcTvShowDao implements TvShowDao{
     private final JdbcTemplate jdbcTemplate;
     public JdbcTvShowDao(DataSource dataSource){jdbcTemplate = new JdbcTemplate(dataSource);}
 
+
+    //todo FIXED
     @Override
     public TvShow getTvShowById(int tvShowId) {
        TvShow tvShow = null;
@@ -25,7 +27,9 @@ public class JdbcTvShowDao implements TvShowDao{
 
        try {
            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, tvShowId);
-           tvShow = mapRowToTvShow(results);
+           if (results.next()) {
+               tvShow = mapRowToTvShow(results);
+           }
        } catch (CannotGetJdbcConnectionException e){
            throw new DaoException("Unable to connect to server...");
        }
