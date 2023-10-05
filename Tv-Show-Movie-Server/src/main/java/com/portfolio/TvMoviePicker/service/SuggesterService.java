@@ -29,7 +29,6 @@ public class SuggesterService {
 
     public Suggester updateSuggester(Suggester updatedSuggester){
         Suggester suggester = null;
-        // TvShow existingTvShow = tvShowDao.getTvShowById(updatedTvShoe.getId());
         suggester = suggesterDao.updateSuggesterName(updatedSuggester);
 
         return suggester;

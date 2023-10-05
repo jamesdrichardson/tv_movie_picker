@@ -4,6 +4,7 @@ import com.portfolio.TvMoviePicker.exception.DaoException;
 import com.portfolio.TvMoviePicker.model.TvShow;
 import com.portfolio.TvMoviePicker.service.TvShowService;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/tvShows")
+//@PreAuthorize("permitALl()")
 public class TvShowController {
     private TvShowService tvShowService;
 
@@ -43,7 +45,7 @@ public class TvShowController {
         return tvShows;
     }
     //todo FIXED request mapping and path variable
-    //todo how to search both genre fields in this method not sure if hitting both based on path
+    //todo FIXED how to search both genre fields in this method not sure if hitting both based on path
     @RequestMapping(path = "/genre1/{genre}", method = RequestMethod.GET)
     public List<TvShow> getTvShowsByGenre(@PathVariable String genre){
         List<TvShow> tvShows = new ArrayList<>();
@@ -80,7 +82,7 @@ public class TvShowController {
         TvShow tvShow = null;
 
         try{
-            tvShow = tvShowService.addTvShow(newTvShow );
+            tvShow = tvShowService.addTvShow(newTvShow);
         }catch (DaoException e){
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }

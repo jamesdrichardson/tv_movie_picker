@@ -11,6 +11,7 @@ import java.util.List;
 import java.lang.reflect.Method;
 
 @RestController
+//@PreAuthorize("permitAll()")
 @RequestMapping(path = "/movies")
 public class MovieController {
 
