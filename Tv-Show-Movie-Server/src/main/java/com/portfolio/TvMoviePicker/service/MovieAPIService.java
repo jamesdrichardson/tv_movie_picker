@@ -9,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class MovieAPIService {
 
+
     RestTemplate restTemplate = new RestTemplate();
     private final String API_KEY = "438c573f965dabf3f35c68830bc78c1c";
     public MovieResults getPopularMovies() throws ResourceAccessException{
