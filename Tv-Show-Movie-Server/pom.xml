@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.techelevator</groupId>
-	<artifactId>bookmark-manager-server</artifactId>
+	<artifactId>tv-movie-picker-server</artifactId>
 	<version>1.0</version>
-	<name>Bookmark Manager Server</name>
-	<description>Bookmark Manager server REST API</description>
+	<name>Tv Movie Picker Server</name>
+	<description>Tv Movie Picker Server REST API</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -26,10 +26,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jdbc</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>

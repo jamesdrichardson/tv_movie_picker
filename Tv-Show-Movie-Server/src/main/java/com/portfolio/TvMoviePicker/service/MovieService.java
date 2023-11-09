@@ -2,7 +2,7 @@ package com.portfolio.TvMoviePicker.service;
 
 import com.portfolio.TvMoviePicker.dao.MovieDao;
 import com.portfolio.TvMoviePicker.dao.SuggesterDao;
-import com.portfolio.TvMoviePicker.model.Movie;
+import com.portfolio.TvMoviePicker.model.movieapi.MovieResults;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -19,56 +19,56 @@ public class MovieService {
     }
 
     //search methods
-    public List<Movie> getMovies(){
-        List<Movie> results = new ArrayList<>();
+    public List<MovieResults> getMovies(){
+        List<MovieResults> results = new ArrayList<>();
 
         results = movieDao.getMovies();
         return results;
     }
 
-    public List<Movie> getMoviesBySuggester(String suggesterName){
-        List<Movie> results = new ArrayList<>();
+    public List<MovieResults> getMoviesBySuggester(String suggesterName){
+        List<MovieResults> results = new ArrayList<>();
 
         results = movieDao.getMovieBySuggesterName(suggesterName);
         return results;
     }
 
-    public List<Movie> getMoviesByGenre(String genre){
-        List<Movie> results = new ArrayList<>();
+    public List<MovieResults> getMoviesByGenre(String genre){
+        List<MovieResults> results = new ArrayList<>();
 
         results = movieDao.getMovieByGenre(genre);
         return results;
     }
 
-    public Movie getMovieById(int movieId){
-        Movie movie = null;
+    public MovieResults getMovieById(int movieId){
+        MovieResults movieResults = null;
 
-        movie = movieDao.getMovieById(movieId);
+        movieResults = movieDao.getMovieById(movieId);
 
-        return movie;
+        return movieResults;
     }
 
     //Create Update Delete methods
-    public Movie addMovie(Movie newMovie){
-        Movie movie = null;
-        movie = movieDao.createMovie(newMovie);
+    public MovieResults addMovie(MovieResults newMovieResults){
+        MovieResults movieResults = null;
+        movieResults = movieDao.createMovie(newMovieResults);
 
-        return movie;
+        return movieResults;
     }
 
-    public Movie updateMovie(Movie updatedMovie){
-        Movie movie = null;
+    public MovieResults updateMovie(MovieResults updatedMovieResults){
+        MovieResults movieResults = null;
        // Movie existingMovie = movieDao.getMovieById(updatedMovie.getId());
-        movie = movieDao.updateMovie(updatedMovie);
+        movieResults = movieDao.updateMovie(updatedMovieResults);
 
-        return movie;
+        return movieResults;
     }
 
     public boolean deleteMovie(int movieId){
         boolean movieDeleted = false;
-        Movie movie = movieDao.getMovieById(movieId);
+        MovieResults movieResults = movieDao.getMovieById(movieId);
 
-        if (movie != null){
+        if (movieResults != null){
             int deleteCount = movieDao.deleteMovieById(movieId);
             movieDeleted = (deleteCount != 0);
         }
