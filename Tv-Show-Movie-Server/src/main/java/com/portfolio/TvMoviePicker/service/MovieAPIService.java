@@ -28,4 +28,11 @@ public class MovieAPIService {
         return movieDetail;
     }
 
+    public MovieDetail searchMovies(String searchString) {
+
+        MovieDetail movieDetail = null;
+        movieDetail = restTemplate.getForObject("https://api.themoviedb.org/3/search/movie?query="+searchString+"?api_key="+API_KEY, MovieDetail.class);
+
+        return movieDetail;
+    }
 }

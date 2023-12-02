@@ -21,17 +21,52 @@ public class MovieController {
 
     public MovieController(MovieAPIService movieService){this.movieService = movieService;}
 
-//    @RequestMapping(method = RequestMethod.GET)
-//    public List<MovieResults> getAllMovies(){
-//        List<MovieResults> movieResults = new ArrayList<>();
-//
-//        try{
-//            movieResults = movieService.getMovies();
-//        } catch (DaoException e){
-//            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
-//        }
-//        return movieResults;
-//    }
+    @RequestMapping(method = RequestMethod.GET)
+    public MovieResults getAllMovies(){
+        MovieResults movieResults = null;
+
+        try{
+            movieResults = movieService.getPopularMovies();
+        } catch (DaoException e){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        }
+        return movieResults;
+    }
+
+    @RequestMapping(path = "/{movieId}", method = RequestMethod.GET)
+    public MovieDetail getMovieById(@PathVariable Integer movieId){
+        MovieDetail movieDetail = null;
+
+        try{
+            movieDetail = movieService.getMovieDetails(movieId);
+            if (movieDetail == null){
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie not found...");
+            }
+        }catch (DaoException e){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        }
+
+        return movieDetail;
+    }
+
+    @RequestMapping(path = "/search/{searchString}", method = RequestMethod.GET)
+    public MovieDetail searchMovie(@PathVariable String searchString){
+        MovieDetail movieDetail = null;
+
+        try{
+            movieDetail = movieService.searchMovies(searchString);
+
+            if(movieDetail == null){
+                throw new  ResponseStatusException(HttpStatus.NOT_FOUND, "Movie not found...");
+            }
+        }catch (DaoException e){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        }
+
+        return movieDetail;
+
+        }
+
 //
 //    @RequestMapping(path = "/{suggesterName}", method = RequestMethod.GET)
 //    public List<MovieResults> getMoviesBySuggesterName(String suggesterName){
@@ -58,21 +93,7 @@ public class MovieController {
 //        return movieResults;
 //    }
 
-    @RequestMapping(path = "/{movieId}", method = RequestMethod.GET)
-    public MovieDetail getMovieById(@PathVariable Integer movieId){
-        MovieDetail movieDetail = null;
 
-        try{
-            movieDetail = movieService.getMovieDetails(movieId);
-            if (movieDetail == null){
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie not found...");
-            }
-        }catch (DaoException e){
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
-        }
-
-        return movieDetail;
-    }
 
 //    @ResponseStatus(value = HttpStatus.CREATED)
 //    @RequestMapping(method = RequestMethod.POST)
